@@ -7,7 +7,7 @@ It supports drag-and-drop / paste of text or files containing point data, then c
 - Paste point data via `Ctrl + V`
 - Accepts plain numeric text or delimited text (CSV / TSV / semicolon)
 - Optional timestamp parsing enables time-window evaluation modes
-- Displays:
+- Displays :
   - Centroid `(meanX, meanY)`
   - Azimuth (principal axis angle)
   - `ΔX`, `ΔY`, and `Δ`
@@ -29,8 +29,8 @@ It supports drag-and-drop / paste of text or files containing point data, then c
 > Initial release.
 
 ## Required Components & Setup
-- Target framework: **.NET Framework 4.8.1**
-- Language version: **C# 7.3**
+- Target framework : **.NET Framework 4.8.1**
+- Language version : **C# 7.3**
 
 ### Initial Setup
 - Clone or download the repository.
@@ -41,20 +41,20 @@ It supports drag-and-drop / paste of text or files containing point data, then c
 - Add data by drag-and-drop or paste into the list.
 
 ## Input formats
-Data can be provided as:
+Data can be provided as :
 - Plain text lines containing at least two numbers (the last two numeric tokens are treated as `X` and `Y`).
 - Delimited text with optional header (delimiter auto-detected among `,`, `;`, tab).
 
 ### Header / column detection
-If a header line is detected, the application attempts to locate:
-- Timestamp column: `timestamp`, `time`, `date`
-- X column: `x`, `centroid x`
-- Y column: `y`, `centroid y`
+If a header line is detected, the application attempts to locate :
+- Timestamp column : `timestamp`, `time`, `date`
+- X column : `x`, `centroid x`
+- Y column : `y`, `centroid y`
 
 If columns cannot be detected, the last two columns are treated as `X` and `Y`.
 
 ### Timestamp parsing
-Timestamp values are optional. When present, the application attempts to parse:
+Timestamp values are optional. When present, the application attempts to parse :
 
 - Time-span format : `mm:ss(.fff...)` or `hh:mm:ss(.fff...)`
 - Date-time format : `yyyy-MM-dd HH:mm:ss(.fffffff)` or ISO-like `yyyy-MM-ddTHH:mm:ss(.fffffff)`
@@ -63,7 +63,7 @@ Timestamp values are optional. When present, the application attempts to parse:
 Parsed timestamps are converted to microseconds relative to the Unix epoch.
 
 ## Evaluation window (Settings)
-The application supports two selection strategies:
+The application supports two selection strategies :
 
 ### Value-based
 - **All determined values**
@@ -79,14 +79,14 @@ The application supports two selection strategies:
 If timestamps are missing, time-based controls are disabled, and the application falls back to a value-based mode (up to the last 1000 points).
 
 ## Computation details
-Given the selected subset of points:
+Given the selected subset of points :
 
 1. **Centroid**
    - `meanX = average(X)`
    - `meanY = average(Y)`
 
 2. **Azimuth (principal axis)**
-   - Computed from the covariance terms:
+   - Computed from the covariance terms :
      - `azimuthRad = 0.5 * atan2(2 * sxy, (sxx - syy))`
 
 3. **Rotation**
