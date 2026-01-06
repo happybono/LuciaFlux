@@ -30,7 +30,6 @@ It supports drag-and-drop / paste of text or files containing point data, then c
 ### v1.0.0.0
 #### January 04, 2026
 > Initial release.
-</details>
 
 ### v2.0.0.0
 #### January 05, 2026
@@ -53,6 +52,27 @@ It supports drag-and-drop / paste of text or files containing point data, then c
 > Restricted drag-and-drop inputs :  
 >   - `lvPoints` now accepts only plain text drops (`DataFormats.Text`) or file drops where all dropped files are `.csv`.  
 >   - Other file types are rejected at drag-enter and ignored at drop.
+>
+> Minor bugs fixed.
+</details>
+
+### v3.0.0.0
+#### January 06, 2026
+> Improved UX / performance for large datasets by making load / paste / open / export / clear async with a shared progress pipeline (RunWithProgressAsync, RunStaWithProgressAsync, pbMain, cancellation via _ctsWork).
+>   
+> Switched parsing from iterator (ParsePointsFromText) to parallel, ordered parsing (ParsePointsFromTextParallelOrdered) with progress + cancellation while preserving header / delimiter detection and line-order output.
+>  
+> Updated drag-and-drop, clipboard paste (Ctrl + V), and Open CSV to use the same async parsing flow and progress mapping (file read → parse → FitColumns).
+>  
+> Refactored Excel export to async + STA-safe and snapshot-based (ExportSnapshot, CaptureExportSnapshot, ExportExcelAsync, ExportExcelCoreSta) with progress milestones; "open after" now opens the saved workbook after completion.
+>  
+> Added DPI-aware UI sizing and contextual guide text (slblDesc) with many hover tooltips for controls / settings.
+>  
+> Adjusted control enabling logic: custom time input enabled only when timestamps exist and rbtnCustomTime is selected; custom sequence selection toggles its numeric UI.
+>  
+> Added multi-core CSV parsing (Parallel.For) and async background operations (Task.Run) with cancellation + progress; Excel export runs on a dedicated STA thread for COM safety.
+>  
+> Minor bugs fixed.
 
 ## Required Components & Setup
 - Target framework : **.NET Framework 4.8.1**
